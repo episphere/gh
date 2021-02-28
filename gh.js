@@ -1,5 +1,7 @@
 console.log("loading gh.js")
 
+//https://github.com/globaldothealth
+
 gh = {date:Date()}
 
 
@@ -11,6 +13,13 @@ gh.getCaseFields=async(url="https://raw.githubusercontent.com/globaldothealth/li
     })
     return gh.caseFields
 }
+
+gh.getCases = async (q='limit=50&page=1',url='https://data.covid-19.global.health/api/cases/')=>{
+    //return await (await fetch(`${url}?${q}`))
+    return await (await fetch(`${url}?${q}`))
+}
+
+gh.getCasesByCountry = async _=>await (await fetch('https://covid-19-aggregates.s3.amazonaws.com/country/latest.json')).json()
 
 gh.caseFields=(async _=>await gh.getCaseFields())()
 
